@@ -5,6 +5,10 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { GameQuery } from "../App";
+import { useDispatch, useSelector } from "react-redux";
+import { selectGames } from "../features/games/gameSlice";
+import { getGames } from "../features/games/gameSlice";
+
 
 interface Props {
   gameQuery: GameQuery | null
@@ -16,9 +20,18 @@ const GameGrid = ({ gameQuery }: Props) => {
   const [page, setPage] = useState(0)
   const [endpoint, setEndpoint] = useState('/games')
   const { data: games, error, isLoading, count } = useGames(endpoint, gameQuery)
+  const dispatch = useDispatch()
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   const allPages = Math.ceil(count / GAMES_PER_PAGE)
   const nextBtnDisabled = page === allPages || page === 0 && allPages === 1 || Number.isNaN(allPages) ? true : false
+  const gms = useSelector(selectGames);
+  console.log('Games: ', gms)
+
+  useEffect(() => {
+    debugger
+    dispatch(getGames())
+
+  }, [])
 
   useEffect(() => {
     setPage(0)
@@ -44,7 +57,7 @@ const GameGrid = ({ gameQuery }: Props) => {
           <GameCardContainer key={skeleton}>
             <GameCardSkeleton />
           </GameCardContainer>)}
-        {games.map(game =>
+        {gms.map(game =>
           <GameCardContainer key={game.id} >
             <GameCard game={game} />
           </GameCardContainer>
