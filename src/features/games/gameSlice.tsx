@@ -30,19 +30,16 @@ const gameSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getGames.pending, (state) => {
-        debugger
         state.isLoading = true;
         state.error = {} as ServerError;
       })
       .addCase(getGames.fulfilled, (state, { payload }) => {
-        debugger
         state.games = payload.results;
         state.count = payload.count;
         state.isLoading = false;
         state.error = {} as ServerError;
       })
       .addCase(getGames.rejected, (state, { payload }) => {
-        debugger
         const msg = payload.message
         const status = payload.response.status
         state.error = { statusCode: Number(status), description: msg };
@@ -51,10 +48,9 @@ const gameSlice = createSlice({
   },
 });
 
-export const getGames = createAsyncThunk('data/update', async (input, { rejectWithValue }) => {
+export const getGames = createAsyncThunk('gameList/gatGames', async (endpoint: string, { rejectWithValue }) => {
   try {
-    debugger
-    const response = await apiClient.get("/games");
+    const response = await apiClient.get(`${endpoint}`);
     return response.data;
   } catch (error) {
     return rejectWithValue(error);
