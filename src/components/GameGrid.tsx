@@ -35,8 +35,8 @@ const GameGrid = ({ gameQuery }: Props) => {
   }, [page])
 
   useEffect(() => {
-    dispatch(getGames(endpoint))
-  }, [endpoint])
+    dispatch(getGames({ endpoint, gameQuery }))
+  }, [endpoint, gameQuery])
 
   const setPrevPage = () => {
     setPage(oldPage => oldPage === 2 ? 0 : oldPage - 1)

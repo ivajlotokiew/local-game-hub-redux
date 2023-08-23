@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import apiClient from "../../services/api-client";
 import { Game } from "../../hooks/useGames";
+import { GameQuery } from "../../App";
 
 interface ServerError {
   statusCode: number
@@ -48,14 +49,23 @@ const gameSlice = createSlice({
   },
 });
 
-export const getGames = createAsyncThunk('gameList/gatGames', async (endpoint: string, { rejectWithValue }) => {
-  try {
-    const response = await apiClient.get(`${endpoint}`);
-    return response.data;
-  } catch (error) {
-    return rejectWithValue(error);
-  }
-});
+export const getGames = createAsyncThunk('gameList/gatGames',
+  async ({ endpoint, gameQuery }: { endpoint: string, gameQuery: GameQuery | null }, { rejectWithValue }) => {
+    try {
+      const response = await apiClient.get(`${endpoint}`,
+        {
+          params: {
+            genres: gameQuery?.genre?.id,
+            platforms: gameQuery?.platform?.id,
+            ordering: gameQuery?.sortOrder,
+            search: gameQuery?.searchText,
+          }
+        });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  });
 
 // Selectors
 export const selectGames = (state: RootState) => state.gameList.games;

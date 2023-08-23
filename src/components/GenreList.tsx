@@ -12,7 +12,6 @@ interface Props {
 }
 
 const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
-    // const { data: genre, error, isLoading } = useGenre()
     const dispatch = useDispatch()
     const genres = useSelector(selectGenres)
     const error = useSelector(selectErrorState)
