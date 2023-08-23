@@ -34,10 +34,10 @@ const gameSlice = createSlice({
         state.isLoading = true;
         state.error = {} as ServerError;
       })
-      .addCase(getGames.fulfilled, (state, action) => {
+      .addCase(getGames.fulfilled, (state, { payload }) => {
         debugger
-        state.games = action.payload.results;
-        state.count = action.payload.count;
+        state.games = payload.results;
+        state.count = payload.count;
         state.isLoading = false;
         state.error = {} as ServerError;
       })
@@ -54,7 +54,7 @@ const gameSlice = createSlice({
 export const getGames = createAsyncThunk('data/update', async (input, { rejectWithValue }) => {
   try {
     debugger
-    const response = await apiClient.get("/gamdes");
+    const response = await apiClient.get("/games");
     return response.data;
   } catch (error) {
     return rejectWithValue(error);
@@ -65,5 +65,6 @@ export const getGames = createAsyncThunk('data/update', async (input, { rejectWi
 export const selectGames = (state: RootState) => state.gameList.games;
 export const selectLoadingState = (state: RootState) => state.gameList.isLoading;
 export const selectErrorState = (state: RootState) => state.gameList.error;
+export const selectGamesCount = (state: RootState) => state.gameList.count;
 
 export default gameSlice.reducer;

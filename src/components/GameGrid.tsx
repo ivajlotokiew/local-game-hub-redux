@@ -5,7 +5,7 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { GameQuery } from "../App";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGames, selectErrorState, selectLoadingState } from "../features/games/gameSlice";
+import { selectGames, selectErrorState, selectLoadingState, selectGamesCount } from "../features/games/gameSlice";
 import { getGames } from "../features/games/gameSlice";
 
 interface Props {
@@ -22,7 +22,7 @@ const GameGrid = ({ gameQuery }: Props) => {
   const games = useSelector(selectGames);
   const err = useSelector(selectErrorState);
   const isLoading = useSelector(selectLoadingState);
-  const count = useSelector(state => state.count)
+  const count = useSelector(selectGamesCount)
   const allPages = Math.ceil(count / GAMES_PER_PAGE)
   const nextBtnDisabled = page === allPages || page === 0 && allPages === 1 || Number.isNaN(allPages) ? true : false
 
