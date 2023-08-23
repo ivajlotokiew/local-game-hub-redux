@@ -54,7 +54,7 @@ const gameSlice = createSlice({
 export const getGames = createAsyncThunk('data/update', async (input, { rejectWithValue }) => {
   try {
     debugger
-    const response = await apiClient.get("/games");
+    const response = await apiClient.get("/gamdes");
     return response.data;
   } catch (error) {
     return rejectWithValue(error);
