@@ -5,8 +5,8 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { GameQuery } from "../App";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGames, selectErrorState, selectLoadingState, selectGamesCount } from "../features/games/gameSlice";
-import { getGames } from "../features/games/gameSlice";
+import { selectGames, selectErrorState, selectLoadingState, selectGamesCount } from "../features/game/gameSlice";
+import { getGames } from "../features/game/gameSlice";
 
 interface Props {
   gameQuery: GameQuery | null
