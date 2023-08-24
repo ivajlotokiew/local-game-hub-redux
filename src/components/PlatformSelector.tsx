@@ -1,7 +1,11 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import React from 'react'
+import { useEffect } from "react"
 import { BsChevronDown } from 'react-icons/bs'
-import usePlatforms, { Platform } from '../hooks/usePlatforms'
+import { Platform } from '../hooks/usePlatforms'
+import { useSelector } from 'react-redux/es/hooks/useSelector'
+import { useDispatch } from 'react-redux'
+import { selectPlatforms, selectErrorState, getPlatforms } from '../features/platform/platformSlice'
 
 interface Props {
     onSelectPlatform: (platform: Platform) => void;
@@ -9,9 +13,17 @@ interface Props {
 }
 
 const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
-    const { data: platforms, error } = usePlatforms("/platforms/lists/parents")
+    const dispatch = useDispatch<any>()
+    const endpoint = "/platforms"
+    const platforms = useSelector(selectPlatforms)
+    const error = useSelector(selectErrorState)
 
-    if (error) return null
+    useEffect(() => {
+        dispatch(getPlatforms(endpoint))
+    }, [endpoint])
+
+
+    if (Object.keys(error).length) return null
     return (
         <Menu>
             <MenuButton as={Button} rightIcon={<BsChevronDown />}>{selectedPlatform?.name || 'Platforms'}</MenuButton>
