@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Button, HStack, Heading, Image, List, ListItem, Text } from '@chakra-ui/react'
 import getCroppedImgUrl from '../services/image-url'
 import { Spinner } from '@chakra-ui/react'
-import useGenre, { Genre } from '../hooks/useGenre';
+import { Genre } from "../common/types"
 import { useDispatch, useSelector } from 'react-redux';
 import { selectGenres, selectErrorState, getGenres, selectLoadingState } from '../features/genre/genreSlice';
 

@@ -2,7 +2,7 @@ import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import React from 'react'
 import { useEffect } from "react"
 import { BsChevronDown } from 'react-icons/bs'
-import { Platform } from '../hooks/usePlatforms'
+import { Platform } from '../common/types'
 import { useSelector } from 'react-redux/es/hooks/useSelector'
 import { useDispatch } from 'react-redux'
 import { selectPlatforms, selectErrorState, getPlatforms } from '../features/platform/platformSlice'
