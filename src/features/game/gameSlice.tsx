@@ -1,19 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import apiClient from "../../services/api-client";
-import { Game } from "../../hooks/useGames";
-import { GameQuery } from "../../App";
-
-interface ServerError {
-  statusCode: number
-  description: string
-}
-
-interface gameState {
-  games: Game[],
-  isLoading: boolean,
-  error: ServerError,
-  count: number,
-}
+import { ServerError } from "../../common/types";
+import { gameState } from "../../common/types";
 
 type RootState = {
   gameList: gameState

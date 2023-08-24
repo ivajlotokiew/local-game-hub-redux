@@ -1,21 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import apiClient from "../../services/api-client";
-import { Genre } from "../../hooks/useGenre";
-
-interface ServerError {
-    statusCode: number
-    description: string
-}
-
-interface genreState {
-    genres: Genre[],
-    isLoading: boolean,
-    error: ServerError,
-}
-
-type RootState = {
-    genreList: genreState
-}
+import { ServerError } from "../../common/types";
+import { genreState } from "../../common/types";
+import { RootState } from "../../common/types";
 
 const genreSlice = createSlice({
     name: "genreList",

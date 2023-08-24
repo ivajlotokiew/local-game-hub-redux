@@ -1,17 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import apiClient from "../../services/api-client";
-import { Platform } from "../../hooks/usePlatforms";
-
-interface ServerError {
-  statusCode: number;
-  description: string;
-}
-
-interface platformState {
-  platforms: Platform[];
-  isLoading: boolean;
-  error: ServerError;
-}
+import { ServerError } from "../../common/types";
+import { platformState } from "../../common/types";
 
 type RootState = {
   platformList: platformState;
