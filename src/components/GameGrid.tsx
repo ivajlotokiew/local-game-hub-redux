@@ -3,7 +3,7 @@ import { Button, HStack, SimpleGrid, Text } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import { GameQuery } from "../App";
+import { GameQuery } from "../common/types";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGames, selectErrorState, selectLoadingState, selectGamesCount } from "../features/game/gameSlice";
 import { getGames } from "../features/game/gameSlice";

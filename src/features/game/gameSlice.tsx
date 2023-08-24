@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import apiClient from "../../services/api-client";
 import { ServerError } from "../../common/types";
 import { gameState } from "../../common/types";
+import { GameQuery } from "../../common/types";
 
 type RootState = {
   gameList: gameState
